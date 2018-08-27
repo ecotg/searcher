@@ -3,27 +3,20 @@ import { Input } from 'antd';
 import { Button } from 'antd';
 
 const SearchInput = Input.Search;
+const PLACEHOLDER = 'Find book...';
 
 export class Search extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = { currentQuery: '' };
-    }
-
-    handleTxtChange(e) {
-        this.setState({currentQuery: e.target.value});
-    }
-    
     render() {
         return <div>
             <SearchInput
-                placeholder="input search text"
+                placeholder={PLACEHOLDER}
                 size="large"
-                onChange={val => this.handleTxtChange(val)}
-                onSearch={()=> this.props.handleSearch(this.state.currentQuery)}
-             >
-            </SearchInput>
-            <Button type="primary" shape="circle" icon="search" onClick={value =>this.props.handleSearch(this.state.currentQuery)} />
+                style={{ width: 200 }}
+                value={this.props.query}
+                onChange={val => this.props.handleTxtChange(val)}
+                onSearch={()=> this.props.handleSearch(this.props.query)}
+             />
+            <Button type="primary" shape="circle" icon="search" onClick={value =>this.props.handleSearch(this.props.query)} />
         </div>;
     }
 }

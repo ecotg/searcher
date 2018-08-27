@@ -1,46 +1,64 @@
 import React, { Component } from "react";
-import { List } from "antd";
-import logo from "./logo.svg";
 import "./App.css";
-import ReactDOM from "react-dom";
 import { Search } from "./components/search";
-import { Result } from "./components/result";
-const { search, get_details } = require("./utilities/google");
+import { InfiniteResult } from "./components/scroll";
+// TODO Rename function
+const { search } = require("./utilities/google");
 
 class App extends Component {
-  renderResults() {
-    return this.state.results.map(result => {
-          return (
-        <Result
-    title={result.volumeInfo.title}
-    author={result.volumeInfo.authors.join(' & ')}
-    published={result.volumeInfo.publishedDate}
-  />
-  );
-  });
+
+  async loadMore(pg) {
+    console.log('\nloading more: page -> ', pg);
+    if (this.state.hasMore) {
+      const { items } = await search(this.state.currentQuery, pg);
+      const currentResults = this.state.results && this.state.results.length ? this.state.results.concat(items) : items;
+      this.setState({
+        results: currentResults,
+        page: pg,
+        hasMore: this.state.resultCount > currentResults.length
+      });
+    }
   }
 
   async handleSearch(query) {
-    const results = await search(query);
-    this.setState({ results, renderResults: true });
-    console.log('\nresults: ', this.state.results);
+    const { items, count } = await search(query, this.state.page);
+    this.setState({
+      results: items,
+      resultCount: count,
+      renderResults: items && items.length,
+      currentQuery: query,
+      page: 0,
+      hasMore: count > items.length
+    });
+  }
+
+  handleTxtChange(e) {
+    this.setState({currentQuery: e.target.value});
   }
 
   constructor(props) {
     super(props);
-    this.state = { results: null, renderResults: false };
+    this.state = {
+      results: [],
+      resultCount: 0,
+      renderResults: false,
+      currentQuery: null,
+      page: 0,
+      loading: false,
+      hasMore: false
+    };
   }
 
   render() {
-    return (<div className="App">
+    return <div className="App">
         <div className="search-box">
-          <Search handleSearch={this.handleSearch.bind(this)} />
+          <Search handleSearch={this.handleSearch.bind(this)} handleTxtChange={this.handleTxtChange.bind(this)} query={this.state.currentQuery} />
         </div>
-        <div className="results">
-        {this.state.renderResults ? <List className="search-results"> {this.renderResults()}</List> : null}
-      </div>
-    </div>)
-
+        <div>{this.state.renderResults
+          ? (<InfiniteResult initialLoad={false} pageStart={0} loadMore={this.loadMore.bind(this)}  hasMore={this.state.hasMore} results={this.state.results}></InfiniteResult>)
+          : (null)}
+        </div>
+    </div>
   }
 }
 
