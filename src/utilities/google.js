@@ -1,4 +1,5 @@
 const rp = require('request-promise');
+
 const RESULTS_LIMIT = 40;
 
 export async function search(query, offset=0) {
@@ -14,6 +15,6 @@ export async function search(query, offset=0) {
         });
         return books;
     } catch (e) {
-        return [];
+        return {items: [], count: 0 };
     }
 }

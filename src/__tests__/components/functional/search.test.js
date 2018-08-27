@@ -1,14 +1,13 @@
 import * as Enzyme from 'enzyme';
-import Adapter from 'enzyme-adapter-react-16';
-
-Enzyme.configure({ adapter: new Adapter() });
-
-import React from "react";
 import { expect } from 'chai';
+import React from "react";
 const sinon = require('sinon');
 import { mount } from "enzyme";
 import { Search } from "../../../components/search";
+import Adapter from 'enzyme-adapter-react-16';
 
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe('Search', () => {
     let handleTxtChange = sinon.stub();
@@ -34,15 +33,6 @@ describe('Search', () => {
     describe('User clicks the button to search', () => {
         beforeEach(() => {
             component.find('button').simulate('click');
-        });
-        it('should trigger search', () => {
-            sinon.assert.called(props.handleSearch);
-            sinon.assert.calledWith(props.handleSearch, 'test-query');
-        });
-    });
-    describe('User hits the enter button to search', () => {
-        beforeEach(() => {
-            component.find('input').simulate('keypress', {key: 'Enter'});
         });
         it('should trigger search', () => {
             sinon.assert.called(props.handleSearch);

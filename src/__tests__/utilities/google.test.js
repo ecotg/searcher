@@ -1,5 +1,4 @@
 import { expect } from 'chai';
-const Bluebird = require('bluebird');
 const rp = require('request-promise');
 const sinon = require('sinon');
 const { search } = require("../../utilities/google");
@@ -9,7 +8,7 @@ const RESULTS_LIMIT = 40;
 describe('google', () => {
     const query = 'Dune';
      beforeAll(() => {
-        sinon.stub(rp, 'get').returns(Bluebird.resolve({items: [], count: 0}))
+        sinon.stub(rp, 'get').resolves({items: [], count: 0})
     });
     afterEach(() => {
         rp.get.reset()
@@ -29,12 +28,21 @@ describe('google', () => {
             });
             describe('google api returns 200 response', () => {
                 beforeEach(() => {
-                    rp.get.returns(Promise.resolve({items: [{title: 'title'}], totalItems: 1 }));
+                    rp.get.resolves({items: [{title: 'title'}], totalItems: 1 });
                 });
                 it('should return the correct results', async () => {
                     const results = await search(query);
                     expect(results.items).to.be.deep.equal([{title: 'title'}]);
                     expect(results.totalItems).to.equal(1);
+                });
+            });
+            describe('google api throws and error', () => {
+                beforeEach(() => {
+                    rp.get.throws({message: 'Sample Error'});
+                });
+                it('should return an empty array of results', async () => {
+                    const results = await await search(query);
+                    expect(results.items).to.be.deep.equal([]);
                 });
             });
         });

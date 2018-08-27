@@ -1,12 +1,12 @@
 import * as Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
+import { expect } from 'chai';
+import { mount } from "enzyme";
+import React from "react";
+
+import { Book } from "../../../components/book";
 
 Enzyme.configure({ adapter: new Adapter() });
-
-import React from "react";
-import { expect } from 'chai';
-import { Book } from "../../../components/book";
-import { mount } from "enzyme";
 
 
 describe('Book', () => {

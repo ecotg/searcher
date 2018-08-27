@@ -1,7 +1,7 @@
-import React, { Component } from "react";
 import "./App.css";
 import { Search } from "./components/search";
 import { InfiniteResult } from "./components/scroll";
+import React, { Component } from "react";
 const { search } = require("./utilities/google");
 
 class App extends Component {

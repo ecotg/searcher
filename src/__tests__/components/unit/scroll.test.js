@@ -1,14 +1,13 @@
 import * as Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-
-Enzyme.configure({ adapter: new Adapter() });
-
-import React from "react";
 import { expect } from 'chai';
+import { mount } from "enzyme";
+import React from "react";
 const sinon = require('sinon');
 import { Result } from "../../../components/result";
 import { InfiniteResult } from "../../../components/scroll";
-import { mount } from "enzyme";
+
+Enzyme.configure({ adapter: new Adapter() });
 
 describe('InfiniteResult' , () => {
     let component;

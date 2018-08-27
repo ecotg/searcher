@@ -1,13 +1,12 @@
 import * as Enzyme from 'enzyme';
 import Adapter from 'enzyme-adapter-react-16';
-
-Enzyme.configure({ adapter: new Adapter() });
-
 import React from "react";
 import { expect } from 'chai';
+import { mount } from "enzyme";
 import { Book } from "../../../components/book";
 import { Result } from "../../../components/result";
-import { mount } from "enzyme";
+
+Enzyme.configure({ adapter: new Adapter() });
 
 const DEFAULT_IMG = "http://www.free-icons-download.net/images/open-book-icon-67666.png";
 
