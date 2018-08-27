@@ -1,10 +1,10 @@
 import * as Enzyme from 'enzyme';
 import { expect } from 'chai';
 import React from "react";
-const sinon = require('sinon');
 import { mount } from "enzyme";
 import { Search } from "../../../components/search";
 import Adapter from 'enzyme-adapter-react-16';
+const sinon = require('sinon');
 
 
 Enzyme.configure({ adapter: new Adapter() });

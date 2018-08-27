@@ -1,6 +1,6 @@
 import "./App.css";
 import { Search } from "./components/search";
-import { InfiniteResult } from "./components/scroll";
+import { Scroll } from "./components/scroll";
 import React, { Component } from "react";
 const { search } = require("./utilities/google");
 
@@ -53,7 +53,7 @@ class App extends Component {
           <Search handleSearch={this.handleSearch.bind(this)} handleTxtChange={this.handleTxtChange.bind(this)} query={this.state.currentQuery} />
         </div>
         <div>{this.state.renderResults
-          ? (<InfiniteResult initialLoad={false} pageStart={0} loadMore={this.loadMore.bind(this)}  hasMore={this.state.hasMore} results={this.state.results}></InfiniteResult>)
+          ? (<Scroll initialLoad={false} pageStart={0} loadMore={this.loadMore.bind(this)}  hasMore={this.state.hasMore} results={this.state.results}/>)
           : (null)}
         </div>
     </div>

@@ -5,16 +5,16 @@ import { mount } from "enzyme";
 import React from "react";
 const sinon = require('sinon');
 import { Result } from "../../../components/result";
-import { InfiniteResult } from "../../../components/scroll";
+import { Scroll } from "../../../components/scroll";
 
 Enzyme.configure({ adapter: new Adapter() });
 
-describe('InfiniteResult' , () => {
+describe('Scroll' , () => {
     let component;
     let props;
     beforeEach(() => {
         props = { results: [{volumeInfo: {}}], loadMore: sinon.stub()};
-        component = mount( <InfiniteResult {...props} />);
+        component = mount( <Scroll {...props} />);
     });
     describe('search returns results', () => {
         it('renders a result list', () => {

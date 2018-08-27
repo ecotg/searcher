@@ -2,7 +2,7 @@ import React from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 import { Result } from "./result";
 
-export class InfiniteResult extends React.Component {
+export class Scroll extends React.Component {
     render() {
         return <InfiniteScroll
             pageStart={0}
