@@ -2,13 +2,11 @@ import React, { Component } from "react";
 import "./App.css";
 import { Search } from "./components/search";
 import { InfiniteResult } from "./components/scroll";
-// TODO Rename function
 const { search } = require("./utilities/google");
 
 class App extends Component {
 
   async loadMore(pg) {
-    console.log('\nloading more: page -> ', pg);
     if (this.state.hasMore) {
       const { items } = await search(this.state.currentQuery, pg);
       const currentResults = this.state.results && this.state.results.length ? this.state.results.concat(items) : items;

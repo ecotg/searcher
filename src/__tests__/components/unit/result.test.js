@@ -5,8 +5,8 @@ Enzyme.configure({ adapter: new Adapter() });
 
 import React from "react";
 import { expect } from 'chai';
-import { Book } from "../../components/book";
-import { Result } from "../../components/result";
+import { Book } from "../../../components/book";
+import { Result } from "../../../components/result";
 import { mount } from "enzyme";
 
 const DEFAULT_IMG = "http://www.free-icons-download.net/images/open-book-icon-67666.png";

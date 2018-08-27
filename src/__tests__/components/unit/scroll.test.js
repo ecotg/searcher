@@ -6,8 +6,8 @@ Enzyme.configure({ adapter: new Adapter() });
 import React from "react";
 import { expect } from 'chai';
 const sinon = require('sinon');
-import { Result } from "../../components/result";
-import { InfiniteResult } from "../../components/Scroll";
+import { Result } from "../../../components/result";
+import { InfiniteResult } from "../../../components/scroll";
 import { mount } from "enzyme";
 
 describe('InfiniteResult' , () => {

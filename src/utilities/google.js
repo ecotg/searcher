@@ -3,8 +3,7 @@ const RESULTS_LIMIT = 40;
 
 export async function search(query, offset=0) {
     try {
-        const books = await rp({
-            method: 'GET',
+        const books = await rp.get({
             url: `https://www.googleapis.com/books/v1/volumes?q=${query}`,
             json: true,
             qs: {
@@ -12,7 +11,7 @@ export async function search(query, offset=0) {
                 startIndex: offset * RESULTS_LIMIT
             },
             transform: (body) => body && body.items ? {items: body.items, count: body.totalItems } : {items: [], count: 0 }
-    });
+        });
         return books;
     } catch (e) {
         return [];

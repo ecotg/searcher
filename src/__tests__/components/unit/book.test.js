@@ -5,8 +5,8 @@ Enzyme.configure({ adapter: new Adapter() });
 
 import React from "react";
 import { expect } from 'chai';
-import { Book } from "../../components/book";
-import { mount, shallow } from "enzyme";
+import { Book } from "../../../components/book";
+import { mount } from "enzyme";
 
 
 describe('Book', () => {
